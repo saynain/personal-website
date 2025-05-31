@@ -1,34 +1,147 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
+
+interface Command {
+  command: string
+  output: string[]
+  delay?: number
+}
 
 export default function Terminal() {
-  const [terminalOutput, setTerminalOutput] = useState<string[]>([])
+  const [currentCommandIndex, setCurrentCommandIndex] = useState(0)
+  const [currentCharIndex, setCurrentCharIndex] = useState(0)
+  const [isTypingCommand, setIsTypingCommand] = useState(true)
+  const [animationComplete, setAnimationComplete] = useState(false)
+  const [displayedCommands, setDisplayedCommands] = useState<Array<{
+    command: string
+    output: string[]
+    completed: boolean
+  }>>([])
+  
+  const terminalContentRef = useRef<HTMLDivElement>(null)
 
-  const clearTerminal = () => {
-    setTerminalOutput([])
+  const commands: Command[] = [
+    {
+      command: "whoami",
+      output: [
+        "Saynain - Full Stack Developer & Blockchain Engineer",
+        "🚀 Passionate about building the future with code",
+        "🔗 Specializing in Web3, DeFi, and distributed systems"
+      ],
+      delay: 2000
+    },
+    {
+      command: "location",
+      output: [
+        "📍 Based in Norway 🇳🇴",
+        "🌍 Available for remote work globally",
+        "🕐 Timezone: Europe/Oslo (CET/CEST)"
+      ],
+      delay: 2000
+    },
+    {
+      command: "education",
+      output: [
+        "🎓 Computer Science & Engineering",
+        "📚 Self-taught blockchain development",
+        "🧠 Continuous learner - always exploring new tech",
+        "💡 Open source contributor"
+      ],
+      delay: 2000
+    },
+    {
+      command: "cat skills.json",
+      output: [
+        '{',
+        '  "languages": ["TypeScript", "Python", "Rust", "Solidity"],',
+        '  "frameworks": ["React", "Next.js", "Node.js", "Express"],',
+        '  "blockchain": ["Ethereum", "Web3.js", "Smart Contracts"],',
+        '  "databases": ["PostgreSQL", "MongoDB", "Redis"],',
+        '  "tools": ["Docker", "AWS", "Git", "Linux"]',
+        '}'
+      ],
+      delay: 3000
+    },
+    {
+      command: "crypto-wallet --balance",
+      output: [
+        "₿ BTC    ↗ +12.5%    Portfolio: 40%",
+        "Ξ ETH    ↗ +8.2%     Portfolio: 35%", 
+        "⬟ SOL    ↘ -2.1%     Portfolio: 15%",
+        "💎 Other ↗ +5.8%     Portfolio: 10%",
+        "",
+        "🔥 DeFi protocols: Uniswap, Aave, Compound"
+      ],
+      delay: 1000
+    }
+  ]
+
+  // Auto-scroll to bottom when new content is added
+  useEffect(() => {
+    if (terminalContentRef.current) {
+      terminalContentRef.current.scrollTop = terminalContentRef.current.scrollHeight
+    }
+  }, [displayedCommands, currentCharIndex])
+
+  // Typing effect - runs only once
+  useEffect(() => {
+    if (animationComplete || currentCommandIndex >= commands.length) {
+      // Animation is complete, mark it as done
+      if (!animationComplete && currentCommandIndex >= commands.length) {
+        setAnimationComplete(true)
+      }
+      return
+    }
+
+    const currentCommand = commands[currentCommandIndex]
+
+    if (isTypingCommand) {
+      // Typing the command
+      if (currentCharIndex < currentCommand.command.length) {
+        const timeout = setTimeout(() => {
+          setCurrentCharIndex(currentCharIndex + 1)
+        }, 100) // Typing speed
+        return () => clearTimeout(timeout)
+      } else {
+        // Command fully typed, wait a moment then show output and move to next
+        const timeout = setTimeout(() => {
+          // Add the completed command with output to displayed commands
+          setDisplayedCommands(prev => [...prev, {
+            command: currentCommand.command,
+            output: currentCommand.output,
+            completed: true
+          }])
+          
+          // Move to next command
+          setCurrentCommandIndex(currentCommandIndex + 1)
+          setCurrentCharIndex(0)
+          setIsTypingCommand(true)
+        }, currentCommand.delay || 500)
+        return () => clearTimeout(timeout)
+      }
+    }
+  }, [currentCommandIndex, currentCharIndex, isTypingCommand, animationComplete, commands])
+
+  const getCurrentTypedCommand = () => {
+    if (currentCommandIndex >= commands.length) return ""
+    return commands[currentCommandIndex].command.slice(0, currentCharIndex)
   }
 
-  const runRandomCommand = () => {
-    const commands = [
-      'npm install happiness',
-      'git commit -m "Fixed everything 🚀"',
-      'docker run --rm blockchain/portfolio',
-      'yarn build && yarn deploy',
-      'crypto-wallet --balance',
-      'starship config --tokyo-night'
-    ]
-    const randomCommand = commands[Math.floor(Math.random() * commands.length)]
-    setTerminalOutput(prev => [...prev, `➜ portfolio main $ ${randomCommand}`, `✅ Command executed successfully!`])
+  const isCommandFullyTyped = () => {
+    if (currentCommandIndex >= commands.length) return false
+    return currentCharIndex >= commands[currentCommandIndex].command.length
   }
 
   return (
     <section id="terminal" className="py-20 bg-gradient-to-b from-slate-900 to-slate-800">
       <div className="max-w-5xl mx-auto px-6">
-        <h2 className="text-4xl font-bold text-center mb-16 text-pink-400">Interactive Terminal</h2>
+        <h2 className="text-4xl font-bold text-center mb-16 text-pink-400">
+          Live Terminal Demo
+        </h2>
         
-        {/* Terminal Window */}
-        <div className="bg-gray-900 rounded-lg shadow-2xl terminal-glow overflow-hidden">
+        {/* Terminal Window - Fixed Size */}
+        <div className="bg-gray-900 rounded-lg shadow-2xl overflow-hidden border border-gray-700">
           {/* Terminal Header */}
           <div className="bg-gray-800 px-4 py-3 flex items-center space-x-2">
             <div className="flex space-x-2">
@@ -37,131 +150,102 @@ export default function Terminal() {
               <div className="w-3 h-3 bg-green-500 rounded-full"></div>
             </div>
             <div className="flex-1 text-center text-gray-400 text-sm font-medium">
-              your-name@portfolio:~$ 
+              saynain@terminal:~$ 
             </div>
           </div>
           
-          {/* Terminal Content */}
-          <div className="p-6 space-y-4 text-sm">
+          {/* Terminal Content - Fixed Height with Scroll */}
+          <div 
+            ref={terminalContentRef}
+            className="p-6 space-y-3 text-sm h-96 overflow-y-auto font-mono bg-gray-900 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800"
+          >
             {/* Welcome Message */}
             <div className="flex items-center space-x-2">
               <span className="text-green-400">➜</span>
               <span className="text-blue-400">~</span>
-              <span className="text-white">welcome</span>
+              <span className="text-white">echo "Welcome to my portfolio!"</span>
             </div>
-            <div className="ml-4 text-gray-300">
-              Welcome to my portfolio! I&apos;m a passionate developer and blockchain enthusiast.
-            </div>
-            
-            {/* Git Status */}
-            <div className="flex items-center space-x-2 mt-4">
-              <span className="text-green-400">➜</span>
-              <span className="text-blue-400">portfolio</span>
-              <span className="bg-purple-600 text-white px-2 py-1 rounded text-xs">main</span>
-              <span className="text-white">git status</span>
-            </div>
-            <div className="ml-4 space-y-1">
-              <div className="text-green-400">On branch main</div>
-              <div className="text-green-400">Your branch is up to date with &apos;origin/main&apos;.</div>
-              <div className="text-gray-300">nothing to commit, working tree clean ✨</div>
+            <div className="ml-4 text-gray-300 mb-4">
+              Welcome to my portfolio! I'm a passionate developer and blockchain enthusiast.
             </div>
             
-            {/* Skills Command */}
-            <div className="flex items-center space-x-2 mt-4">
-              <span className="text-green-400">➜</span>
-              <span className="text-blue-400">portfolio</span>
-              <span className="bg-purple-600 text-white px-2 py-1 rounded text-xs">main</span>
-              <span className="text-white">cat skills.json</span>
-            </div>
-            <div className="ml-4 bg-gray-800 p-4 rounded border-l-4 border-purple-500">
-              <pre className="text-gray-300">
-{`{
-  "languages": ["TypeScript", "Python", "Rust", "Solidity"],
-  "frameworks": ["React", "Next.js", "Node.js"],
-  "blockchain": ["Ethereum", "Web3", "DeFi", "Smart Contracts"],
-  "tools": ["Docker", "AWS", "PostgreSQL"]
-}`}
-              </pre>
-            </div>
-            
-            {/* Crypto Portfolio */}
-            <div className="flex items-center space-x-2 mt-4">
-              <span className="text-green-400">➜</span>
-              <span className="text-blue-400">portfolio</span>
-              <span className="bg-purple-600 text-white px-2 py-1 rounded text-xs">main</span>
-              <span className="text-white">crypto-portfolio --status</span>
-            </div>
-            <div className="ml-4 space-y-2">
-              <div className="flex items-center space-x-4">
-                <span className="text-orange-400">₿ BTC</span>
-                <span className="text-green-400">↗ +12.5%</span>
-                <span className="text-gray-300">Portfolio: 40%</span>
+            {/* Display completed commands */}
+            {displayedCommands.map((cmd, index) => (
+              <div key={index} className="space-y-2">
+                <div className="flex items-center space-x-2">
+                  <span className="text-green-400">➜</span>
+                  <span className="text-blue-400">portfolio</span>
+                  <span className="bg-purple-600 text-white px-2 py-1 rounded text-xs">main</span>
+                  <span className="text-white">{cmd.command}</span>
+                </div>
+                <div className="ml-4 space-y-1">
+                  {cmd.output.map((line, lineIndex) => (
+                    <div 
+                      key={lineIndex} 
+                      className={`${
+                        line.startsWith('{') || line.startsWith('}') || line.includes(':') 
+                          ? 'text-yellow-300' 
+                          : line.includes('↗') 
+                            ? 'text-green-400'
+                            : line.includes('↘')
+                              ? 'text-red-400'
+                              : 'text-gray-300'
+                      } animate-fade-in`}
+                      style={{
+                        animationDelay: `${lineIndex * 150}ms`
+                      }}
+                    >
+                      {line}
+                    </div>
+                  ))}
+                </div>
               </div>
-              <div className="flex items-center space-x-4">
-                <span className="text-blue-400">Ξ ETH</span>
-                <span className="text-green-400">↗ +8.2%</span>
-                <span className="text-gray-300">Portfolio: 35%</span>
-              </div>
-              <div className="flex items-center space-x-4">
-                <span className="text-purple-400">⬟ SOL</span>
-                <span className="text-red-400">↘ -2.1%</span>
-                <span className="text-gray-300">Portfolio: 15%</span>
-              </div>
-              <div className="text-gray-400 text-xs mt-2">DeFi protocols active: Uniswap, Aave, Compound</div>
-            </div>
-            
-            {/* Contact */}
-            <div className="flex items-center space-x-2 mt-4">
-              <span className="text-green-400">➜</span>
-              <span className="text-blue-400">portfolio</span>
-              <span className="bg-purple-600 text-white px-2 py-1 rounded text-xs">main</span>
-              <span className="text-white typing-animation">contact --social</span>
-            </div>
-            <div className="ml-4 space-y-1">
-              <div className="flex items-center space-x-2">
-                <span className="text-gray-400">GitHub:</span>
-                <a href="https://github.com/yourusername" className="text-blue-400 hover:underline">github.com/yourusername</a>
-              </div>
-              <div className="flex items-center space-x-2">
-                <span className="text-gray-400">Blog:</span>
-                <a href="https://yourblog.com" className="text-blue-400 hover:underline">yourblog.com</a>
-              </div>
-              <div className="flex items-center space-x-2">
-                <span className="text-gray-400">Email:</span>
-                <a href="mailto:your.email@example.com" className="text-blue-400 hover:underline">your.email@example.com</a>
-              </div>
-            </div>
-
-            {/* Dynamic Output */}
-            {terminalOutput.map((line, index) => (
-              <div key={index} className="text-gray-300">{line}</div>
             ))}
             
-            {/* Cursor */}
-            <div className="flex items-center space-x-2 mt-6">
-              <span className="text-green-400">➜</span>
-              <span className="text-blue-400">portfolio</span>
-              <span className="bg-purple-600 text-white px-2 py-1 rounded text-xs">main</span>
-              <span className="text-white">_</span>
-              <span className="animate-ping w-2 h-5 bg-purple-400 inline-block"></span>
-            </div>
+            {/* Current typing command - only show if animation is not complete */}
+            {!animationComplete && currentCommandIndex < commands.length && (
+              <div className="flex items-center space-x-2">
+                <span className="text-green-400">➜</span>
+                <span className="text-blue-400">portfolio</span>
+                <span className="bg-purple-600 text-white px-2 py-1 rounded text-xs">main</span>
+                <span className="text-white">
+                  {getCurrentTypedCommand()}
+                  {!isCommandFullyTyped() && (
+                    <span className="animate-ping bg-purple-400 w-2 h-5 inline-block ml-1"></span>
+                  )}
+                </span>
+              </div>
+            )}
+            
+            {/* Final cursor when animation is complete */}
+            {animationComplete && (
+              <div className="flex items-center space-x-2 mt-4">
+                <span className="text-green-400">➜</span>
+                <span className="text-blue-400">portfolio</span>
+                <span className="bg-purple-600 text-white px-2 py-1 rounded text-xs">main</span>
+                <span className="text-white">_</span>
+                <span className="animate-pulse w-2 h-5 bg-purple-400 inline-block"></span>
+              </div>
+            )}
           </div>
         </div>
         
-        {/* Terminal Actions */}
-        <div className="flex justify-center mt-8 space-x-4">
-          <button 
-            onClick={clearTerminal}
-            className="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded transition-colors"
-          >
-            Clear Terminal
-          </button>
-          <button 
-            onClick={runRandomCommand}
-            className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded transition-colors"
-          >
-            Run Random Command
-          </button>
+        {/* Status indicator */}
+        <div className="flex justify-center mt-6">
+          <div className="flex items-center space-x-2 text-gray-400 text-sm">
+            <div className={`w-2 h-2 rounded-full ${
+              animationComplete ? 'bg-green-400' : 'bg-yellow-400 animate-pulse'
+            }`}></div>
+            <span>
+              {animationComplete ? 'Terminal demo completed' : 'Live terminal simulation'}
+            </span>
+            {animationComplete && (
+              <>
+                <span>•</span>
+                <span>Refresh page to replay</span>
+              </>
+            )}
+          </div>
         </div>
       </div>
     </section>
