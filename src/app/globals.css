@@ -1,26 +1,188 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0f172a; /* slate-900 for dark portfolio theme */
+  --foreground: #ffffff;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-mono: var(--font-jetbrains-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #0f172a; /* Keep dark theme consistent */
+    --foreground: #ffffff;
   }
 }
 
+/* Override body for portfolio design */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-jetbrains-mono), monospace;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Portfolio-specific styles */
+.font-mono {
+  font-family: var(--font-jetbrains-mono), monospace;
+}
+
+/* Terminal glow effect */
+.terminal-glow {
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+}
+
+/* Typing animation for terminal */
+@keyframes typing {
+  from { 
+    width: 0; 
+  }
+  to { 
+    width: 100%; 
+  }
+}
+
+@keyframes blink {
+  0%, 50% { 
+    border-color: transparent; 
+  }
+  51%, 100% { 
+    border-color: #a855f7; 
+  }
+}
+
+.typing-animation {
+  overflow: hidden;
+  border-right: 2px solid #a855f7;
+  white-space: nowrap;
+  animation: typing 3s steps(40, end), blink 1s infinite;
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1e293b; /* slate-800 */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ec4899; /* pink-500 */
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #db2777; /* pink-600 */
+}
+
+/* Selection styling */
+::selection {
+  background-color: rgba(236, 72, 153, 0.3); /* pink-500 with opacity */
+  color: #ffffff;
+}
+
+/* Focus styles for accessibility */
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid #ec4899; /* pink-500 */
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Gradient text support for older browsers */
+.gradient-text {
+  background: linear-gradient(to right, #ffffff, #ec4899, #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Terminal syntax highlighting */
+.terminal-content .text-blue-400 {
+  color: #60a5fa;
+}
+
+.terminal-content .text-green-400 {
+  color: #4ade80;
+}
+
+.terminal-content .text-yellow-400 {
+  color: #facc15;
+}
+
+.terminal-content .text-purple-400 {
+  color: #c084fc;
+}
+
+.terminal-content .text-pink-400 {
+  color: #f472b6;
+}
+
+.terminal-content .text-orange-400 {
+  color: #fb923c;
+}
+
+.terminal-content .text-red-400 {
+  color: #f87171;
+}
+
+/* Loading animation for project cards */
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  background-size: 200px 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Hover effects for interactive elements */
+.hover-glow:hover {
+  box-shadow: 0 0 30px rgba(236, 72, 153, 0.3);
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
+
+/* Mobile responsiveness improvements */
+@media (max-width: 768px) {
+  .typing-animation {
+    animation: typing 2s steps(20, end), blink 1s infinite;
+  }
+  
+  .terminal-glow {
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
+  }
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .typing-animation {
+    animation: none;
+    border-right: 2px solid #a855f7;
+  }
+  
+  .animate-pulse,
+  .animate-ping {
+    animation: none;
+  }
+  
+  html {
+    scroll-behavior: auto;
+  }
 }
