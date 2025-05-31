@@ -201,7 +201,7 @@ export default function Projects() {
             Want to see more? Check out my GitHub for additional projects and contributions.
           </p>
           <a 
-            href="https://github.com/yourusername" 
+            href="https://github.com/saynain" 
             target="_blank" 
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500 to-purple-600 px-6 py-3 rounded-lg font-semibold hover:shadow-lg hover:shadow-pink-500/25 transition-all duration-300 transform hover:scale-105 text-white"
