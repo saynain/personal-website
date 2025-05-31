@@ -134,14 +134,14 @@ export default function Terminal() {
   }
 
   return (
-    <section id="terminal" className="py-20 bg-gradient-to-b from-slate-900 to-slate-800">
+    <section id="terminal" className="py-20 bg-gradient-to-b from-gray-50 to-white dark:from-slate-900 dark:to-slate-800">
       <div className="max-w-5xl mx-auto px-6">
         <h2 className="text-4xl font-bold text-center mb-16 text-pink-400">
           Live Terminal Demo
         </h2>
         
         {/* Terminal Window - Fixed Size */}
-        <div className="bg-gray-900 rounded-lg shadow-2xl overflow-hidden border border-gray-700">
+        <div className="bg-gray-900 rounded-lg shadow-2xl overflow-hidden border border-gray-200 dark:border-gray-700">
           {/* Terminal Header */}
           <div className="bg-gray-800 px-4 py-3 flex items-center space-x-2">
             <div className="flex space-x-2">
@@ -232,7 +232,7 @@ export default function Terminal() {
         
         {/* Status indicator */}
         <div className="flex justify-center mt-6">
-          <div className="flex items-center space-x-2 text-gray-400 text-sm">
+          <div className="flex items-center space-x-2 text-gray-500 dark:text-gray-400 text-sm">
             <div className={`w-2 h-2 rounded-full ${
               animationComplete ? 'bg-green-400' : 'bg-yellow-400 animate-pulse'
             }`}></div>

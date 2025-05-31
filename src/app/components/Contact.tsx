@@ -59,10 +59,10 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-gradient-to-b from-slate-900 to-slate-800">
+    <section id="contact" className="py-20 bg-gradient-to-b from-gray-50 to-white dark:from-slate-900 dark:to-slate-800">
       <div className="max-w-4xl mx-auto px-6 text-center">
         <h2 className="text-4xl font-bold mb-8 text-pink-400">Let&apos;s Build Something Amazing</h2>
-        <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed">
+        <p className="text-xl text-gray-600 dark:text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed">
           Always excited to collaborate on innovative projects, especially those involving 
           blockchain technology, fintech, or cutting-edge web development.
         </p>
@@ -70,10 +70,10 @@ export default function Contact() {
         {/* Contact Methods */}
         <div className="grid md:grid-cols-2 gap-8 mb-12">
           {/* Email Card */}
-          <div className="bg-gradient-to-br from-slate-800 to-gray-900 p-6 rounded-xl border border-pink-400/20 hover:border-pink-400/40 transition-all duration-300">
+          <div className="bg-gradient-to-br from-gray-100 to-gray-200 dark:from-slate-800 dark:to-gray-900 p-6 rounded-xl border border-pink-400/20 hover:border-pink-400/40 transition-all duration-300">
             <div className="text-3xl mb-4">📧</div>
-            <h3 className="text-lg font-bold text-white mb-2">Send me an email</h3>
-            <p className="text-gray-400 text-sm mb-4">
+            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Send me an email</h3>
+            <p className="text-gray-500 dark:text-gray-400 text-sm mb-4">
               For project inquiries, collaborations, or just to say hello
             </p>
             <button
@@ -100,14 +100,14 @@ export default function Contact() {
           </div>
 
           {/* Meeting Card */}
-          <div className="bg-gradient-to-br from-slate-800 to-gray-900 p-6 rounded-xl border border-purple-400/20 hover:border-purple-400/40 transition-all duration-300">
+          <div className="bg-gradient-to-br from-gray-100 to-gray-200 dark:from-slate-800 dark:to-gray-900 p-6 rounded-xl border border-purple-400/20 hover:border-purple-400/40 transition-all duration-300">
             <div className="text-3xl mb-4">💼</div>
-            <h3 className="text-lg font-bold text-white mb-2">Schedule a meeting</h3>
-            <p className="text-gray-400 text-sm mb-4">
+            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Schedule a meeting</h3>
+            <p className="text-gray-500 dark:text-gray-400 text-sm mb-4">
               Let&apos;s discuss your project over a virtual coffee
             </p>
             <a
-              href="https://calendly.com/yourusername" // Replace with your actual calendar link
+              href="https://calendly.com/yourusername"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-purple-500/20 text-purple-400 px-4 py-2 rounded-lg hover:bg-purple-500/30 transition-all duration-300 border border-purple-500/30"
@@ -128,14 +128,14 @@ export default function Contact() {
               href={social.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex flex-col items-center gap-3 bg-gray-800/50 border border-pink-400/20 px-4 py-6 rounded-lg hover:border-pink-400/40 hover:bg-pink-400/5 transition-all duration-300 group"
+              className="flex flex-col items-center gap-3 bg-gray-100/50 dark:bg-gray-800/50 border border-pink-400/20 px-4 py-6 rounded-lg hover:border-pink-400/40 hover:bg-pink-400/5 transition-all duration-300 group"
             >
-              <div className="text-gray-400 group-hover:text-pink-400 transition-colors">
+              <div className="text-gray-600 dark:text-gray-400 group-hover:text-pink-400 transition-colors">
                 {social.icon}
               </div>
               <div className="text-center">
-                <div className="text-white font-medium text-sm">{social.name}</div>
-                <div className="text-gray-500 text-xs mt-1">{social.description}</div>
+                <div className="text-gray-900 dark:text-white font-medium text-sm">{social.name}</div>
+                <div className="text-gray-400 dark:text-gray-500 text-xs mt-1">{social.description}</div>
               </div>
             </a>
           ))}
@@ -145,7 +145,7 @@ export default function Contact() {
         <div className="mb-12">
           <a 
             href="mailto:your.email@example.com"
-            className="inline-flex items-center gap-3 bg-gradient-to-r from-pink-500 to-purple-600 px-8 py-4 rounded-lg font-semibold text-lg hover:shadow-lg hover:shadow-pink-500/25 transition-all duration-300 transform hover:scale-105"
+            className="inline-flex items-center gap-3 bg-gradient-to-r from-pink-500 to-purple-600 px-8 py-4 rounded-lg font-semibold text-lg hover:shadow-lg hover:shadow-pink-500/25 transition-all duration-300 transform hover:scale-105 text-white"
           >
             <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
               <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
@@ -156,25 +156,25 @@ export default function Contact() {
         </div>
 
         {/* Crypto Address (Optional) */}
-        <div className="bg-slate-800/50 rounded-lg p-6 border border-yellow-500/20 mb-8">
-          <h3 className="text-lg font-bold text-white mb-4">Support My Work 🚀</h3>
-          <p className="text-gray-400 text-sm mb-4">
+        <div className="bg-gray-100/50 dark:bg-slate-800/50 rounded-lg p-6 border border-yellow-500/20 mb-8">
+          <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Support My Work 🚀</h3>
+          <p className="text-gray-500 dark:text-gray-400 text-sm mb-4">
             If you find my projects helpful, consider supporting with crypto!
           </p>
           <div className="space-y-2 text-xs">
             <div className="flex items-center justify-center gap-2 text-yellow-400">
               <span>BTC:</span>
-              <code className="bg-slate-700 px-2 py-1 rounded">bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh</code>
+              <code className="bg-gray-200 dark:bg-slate-700 px-2 py-1 rounded text-gray-700 dark:text-gray-300">bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh</code>
             </div>
             <div className="flex items-center justify-center gap-2 text-blue-400">
               <span>ETH:</span>
-              <code className="bg-slate-700 px-2 py-1 rounded">0x742d35Cc6634C0532925a3b8D9c9b22c9c7b2b42</code>
+              <code className="bg-gray-200 dark:bg-slate-700 px-2 py-1 rounded text-gray-700 dark:text-gray-300">0x742d35Cc6634C0532925a3b8D9c9b22c9c7b2b42</code>
             </div>
           </div>
         </div>
         
         {/* Footer */}
-        <div className="text-gray-400 text-sm space-y-2">
+        <div className="text-gray-500 dark:text-gray-400 text-sm space-y-2">
           <p>Built with ❤️ using Next.js, TypeScript, and Tailwind CSS</p>
           <p>© 2024 Your Name. All rights reserved.</p>
           <div className="flex items-center justify-center gap-4 mt-4 text-xs">

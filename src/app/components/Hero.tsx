@@ -6,9 +6,9 @@ export default function Hero() {
   }
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-white dark:bg-slate-900">
       {/* Animated Background */}
-      <div className="absolute inset-0 opacity-20">
+      <div className="absolute inset-0 opacity-20 dark:opacity-20">
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-500 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-pink-500 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute top-1/2 left-1/2 w-48 h-48 bg-rose-500 rounded-full blur-3xl animate-pulse"></div>
@@ -16,13 +16,13 @@ export default function Hero() {
       
       <div className="text-center z-10 max-w-4xl mx-auto px-6">
         <div className="mb-6 text-pink-400 text-lg">Hello, World! I&apos;m</div>
-        <h1 className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-white via-pink-400 to-purple-500 bg-clip-text text-transparent">
+        <h1 className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-pink-400 to-purple-500 dark:from-white dark:via-pink-400 dark:to-purple-500 bg-clip-text text-transparent">
           Saynain
         </h1>
-        <p className="text-xl md:text-2xl mb-8 text-gray-300 max-w-2xl mx-auto leading-relaxed">
+        <p className="text-xl md:text-2xl mb-8 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
           IT Specialist • Engineer • Blockchain Enthusiast
         </p>
-        <p className="text-lg mb-12 text-gray-400 max-w-3xl mx-auto">
+        <p className="text-lg mb-12 text-gray-500 dark:text-gray-400 max-w-3xl mx-auto">
           Building the future one commit at a time. Passionate about distributed systems, 
           cryptography, and creating elegant solutions to complex problems.
         </p>
@@ -31,7 +31,7 @@ export default function Hero() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <button 
             onClick={() => scrollToSection('projects')}
-            className="bg-gradient-to-r from-pink-500 to-purple-600 px-8 py-3 rounded-lg font-semibold hover:shadow-lg hover:shadow-pink-500/25 transition-all duration-300 transform hover:scale-105"
+            className="bg-gradient-to-r from-pink-500 to-purple-600 px-8 py-3 rounded-lg font-semibold hover:shadow-lg hover:shadow-pink-500/25 transition-all duration-300 transform hover:scale-105 text-white"
           >
             View My Work
           </button>
@@ -39,7 +39,7 @@ export default function Hero() {
             href="https://github.com/saynain" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="border-2 border-pink-400 px-8 py-3 rounded-lg font-semibold hover:bg-pink-400 hover:text-slate-900 transition-all duration-300"
+            className="border-2 border-pink-400 px-8 py-3 rounded-lg font-semibold text-pink-400 hover:bg-pink-400 hover:text-white dark:hover:text-slate-900 transition-all duration-300"
           >
             GitHub Profile
           </a>
