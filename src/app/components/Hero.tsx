@@ -20,7 +20,7 @@ export default function Hero() {
           Saynain
         </h1>
         <p className="text-xl md:text-2xl mb-8 text-gray-300 max-w-2xl mx-auto leading-relaxed">
-          Full-Stack Developer • Blockchain Engineer • Technology Enthusiast
+          IT Specialist • Engineer • Blockchain Enthusiast
         </p>
         <p className="text-lg mb-12 text-gray-400 max-w-3xl mx-auto">
           Building the future one commit at a time. Passionate about distributed systems, 
@@ -36,7 +36,7 @@ export default function Hero() {
             View My Work
           </button>
           <a 
-            href="https://github.com/yourusername" 
+            href="https://github.com/saynain" 
             target="_blank" 
             rel="noopener noreferrer"
             className="border-2 border-pink-400 px-8 py-3 rounded-lg font-semibold hover:bg-pink-400 hover:text-slate-900 transition-all duration-300"
