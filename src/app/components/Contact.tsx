@@ -67,59 +67,6 @@ export default function Contact() {
           blockchain technology.
         </p>
         
-        {/* Contact Methods */}
-        <div className="grid md:grid-cols-2 gap-8 mb-12">
-          {/* Email Card */}
-          <div className="bg-gradient-to-br from-gray-100 to-gray-200 dark:from-slate-800 dark:to-gray-900 p-6 rounded-xl border border-pink-400/20 hover:border-pink-400/40 transition-all duration-300">
-            <div className="text-3xl mb-4">📧</div>
-            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Send me an email</h3>
-            <p className="text-gray-500 dark:text-gray-400 text-sm mb-4">
-              For project inquiries, collaborations, or just to say hello
-            </p>
-            <button
-              onClick={handleEmailCopy}
-              className="inline-flex items-center gap-2 bg-pink-500/20 text-pink-400 px-4 py-2 rounded-lg hover:bg-pink-500/30 transition-all duration-300 border border-pink-500/30"
-            >
-              {copiedEmail ? (
-                <>
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
-                  </svg>
-                  Copied!
-                </>
-              ) : (
-                <>
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"></path>
-                    <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z"></path>
-                  </svg>
-                  Copy Email
-                </>
-              )}
-            </button>
-          </div>
-
-          {/* Meeting Card */}
-          <div className="bg-gradient-to-br from-gray-100 to-gray-200 dark:from-slate-800 dark:to-gray-900 p-6 rounded-xl border border-purple-400/20 hover:border-purple-400/40 transition-all duration-300">
-            <div className="text-3xl mb-4">💼</div>
-            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Schedule a meeting</h3>
-            <p className="text-gray-500 dark:text-gray-400 text-sm mb-4">
-              Let&apos;s discuss your project over a virtual coffee
-            </p>
-            <a
-              href="https://calendly.com/yourusername"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-purple-500/20 text-purple-400 px-4 py-2 rounded-lg hover:bg-purple-500/30 transition-all duration-300 border border-purple-500/30"
-            >
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd"></path>
-              </svg>
-              Book a Call
-            </a>
-          </div>
-        </div>
-        
         {/* Social Links */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
           {socialLinks.map((social, index) => (
