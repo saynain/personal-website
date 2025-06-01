@@ -23,8 +23,8 @@ export default function Projects() {
   const projects: Project[] = [
     {
       id: 1,
-      title: "DeFi Portfolio Tracker",
-      description: "A React-based dashboard for tracking DeFi investments across multiple blockchains. Features real-time price updates and yield farming analytics.",
+      title: "TBA",
+      description: "More details are coming soon.",
       icon: "₿",
       iconBg: "bg-yellow-500/20",
       tags: [
@@ -32,14 +32,14 @@ export default function Projects() {
         { name: "Web3", color: "bg-yellow-500/20 text-yellow-400" },
         { name: "TypeScript", color: "bg-pink-500/20 text-pink-400" },
       ],
-      liveUrl: "https://defi-tracker-demo.com",
-      githubUrl: "https://github.com/yourusername/defi-tracker",
+      liveUrl: "https://saynain.com",
+      githubUrl: "https://github.com/saynain/repo",
       featured: true,
     },
     {
       id: 2,
-      title: "Lightning API Gateway",
-      description: "High-performance API gateway built with Node.js and Redis. Handles 10k+ requests/second with advanced rate limiting and caching strategies.",
+      title: "TBA",
+      description: "More details are coming soon.",
       icon: "⚡",
       iconBg: "bg-purple-500/20",
       tags: [
@@ -47,14 +47,14 @@ export default function Projects() {
         { name: "Redis", color: "bg-red-500/20 text-red-400" },
         { name: "Docker", color: "bg-blue-500/20 text-blue-400" },
       ],
-      liveUrl: "https://api-gateway-demo.com",
-      githubUrl: "https://github.com/yourusername/lightning-gateway",
+      liveUrl: "https://saynain.com",
+      githubUrl: "https://github.com/saynain/repo",
       featured: true,
     },
     {
       id: 3,
-      title: "Design System Library",
-      description: "Comprehensive React component library with Storybook documentation. Used by 5+ teams for consistent UI/UX across products.",
+      title: "TBA",
+      description: "More details are coming soon.",
       icon: "🎨",
       iconBg: "bg-pink-500/20",
       tags: [
@@ -62,13 +62,13 @@ export default function Projects() {
         { name: "Storybook", color: "bg-pink-500/20 text-pink-400" },
         { name: "CSS-in-JS", color: "bg-blue-500/20 text-blue-400" },
       ],
-      githubUrl: "https://github.com/yourusername/design-system",
+      githubUrl: "https://github.com/saynain/repo",
       featured: true,
     },
     {
       id: 4,
-      title: "Smart Contract Auditor",
-      description: "Automated security analysis tool for Solidity smart contracts. Detects common vulnerabilities and suggests optimizations.",
+      title: "TBA",
+      description: "More details are coming soon.",
       icon: "🔍",
       iconBg: "bg-green-500/20",
       tags: [
@@ -76,12 +76,12 @@ export default function Projects() {
         { name: "Python", color: "bg-green-500/20 text-green-400" },
         { name: "Security", color: "bg-red-500/20 text-red-400" },
       ],
-      githubUrl: "https://github.com/yourusername/contract-auditor",
+      githubUrl: "https://github.com/saynain/repo",
     },
     {
       id: 5,
-      title: "Crypto Trading Bot",
-      description: "Algorithmic trading bot with machine learning integration. Supports multiple exchanges and implements advanced risk management.",
+      title: "TBA",
+      description: "More details are coming soon.",
       icon: "🤖",
       iconBg: "bg-blue-500/20",
       tags: [
@@ -89,12 +89,12 @@ export default function Projects() {
         { name: "ML", color: "bg-purple-500/20 text-purple-400" },
         { name: "APIs", color: "bg-blue-500/20 text-blue-400" },
       ],
-      githubUrl: "https://github.com/yourusername/trading-bot",
+      githubUrl: "https://github.com/saynain/repo",
     },
     {
       id: 6,
-      title: "NFT Marketplace",
-      description: "Full-stack NFT marketplace with minting, trading, and auction features. Built on Ethereum with IPFS storage.",
+      title: "TBA",
+      description: "More details are coming soon.",
       icon: "🖼️",
       iconBg: "bg-orange-500/20",
       tags: [
@@ -102,8 +102,8 @@ export default function Projects() {
         { name: "IPFS", color: "bg-green-500/20 text-green-400" },
         { name: "Next.js", color: "bg-purple-500/20 text-purple-400" },
       ],
-      liveUrl: "https://nft-marketplace-demo.com",
-      githubUrl: "https://github.com/yourusername/nft-marketplace",
+      liveUrl: "https://saynain.com",
+      githubUrl: "https://github.com/saynain/repo",
     },
   ];
 
