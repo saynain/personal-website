@@ -7,6 +7,22 @@ export default function Hero() {
 
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-white dark:bg-slate-900">
+      {/* Under Construction Banner */}
+      <div className="absolute top-24 left-1/2 transform -translate-x-1/2 z-20">
+        <div className="bg-gradient-to-r from-pink-500/20 to-purple-600/20 backdrop-blur-sm border border-pink-400/30 rounded-lg px-6 py-3 shadow-lg animate-pulse">
+          <div className="flex items-center gap-3">
+            <div className="flex gap-1">
+              <div className="w-2 h-2 bg-pink-400 rounded-full animate-bounce"></div>
+              <div className="w-2 h-2 bg-purple-500 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
+              <div className="w-2 h-2 bg-pink-400 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+            </div>
+            <span className="text-pink-400 font-semibold text-sm">
+              🚧 | Under Construction
+            </span>
+          </div>
+        </div>
+      </div>
+
       {/* Animated Background */}
       <div className="absolute inset-0 opacity-20 dark:opacity-20">
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-500 rounded-full blur-3xl animate-pulse"></div>
