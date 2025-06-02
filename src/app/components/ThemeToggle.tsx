@@ -6,7 +6,7 @@ import { SunIcon, MoonIcon } from '@heroicons/react/24/outline'
 
 export default function ThemeToggle() {
   const [mounted, setMounted] = useState(false)
-  const { theme, setTheme, resolvedTheme } = useTheme()
+  const { theme, setTheme } = useTheme()
 
   useEffect(() => {
     setMounted(true)

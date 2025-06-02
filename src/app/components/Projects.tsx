@@ -110,7 +110,7 @@ export default function Projects() {
   const featuredProjects = projects.filter(project => project.featured);
   const otherProjects = projects.filter(project => !project.featured);
 
-  const ProjectCard = ({ project, index }: { project: Project; index: number }) => (
+  const ProjectCard = ({ project }: { project: Project }) => (
     <div 
       className={`bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-slate-800 p-6 rounded-xl border border-pink-400/20 
         hover:border-pink-400/40 transition-all duration-300 group hover:scale-105 transform
@@ -178,8 +178,8 @@ export default function Projects() {
         
         {/* Featured Projects */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-          {featuredProjects.map((project, index) => (
-            <ProjectCard key={project.id} project={project} index={index} />
+          {featuredProjects.map((project) => (
+            <ProjectCard key={project.id} project={project} />
           ))}
         </div>
 
@@ -188,8 +188,8 @@ export default function Projects() {
           <>
             <h3 className="text-2xl font-bold text-center mb-12 text-purple-400">More Projects</h3>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {otherProjects.map((project, index) => (
-                <ProjectCard key={project.id} project={project} index={index} />
+              {otherProjects.map((project) => (
+                <ProjectCard key={project.id} project={project} />
               ))}
             </div>
           </>

@@ -1,19 +1,6 @@
 'use client'
 
-import { useState } from 'react';
-
 export default function Contact() {
-  const [copiedEmail, setCopiedEmail] = useState(false);
-
-  const handleEmailCopy = async () => {
-    try {
-      await navigator.clipboard.writeText('sindre.ryland@gmail.com');
-      setCopiedEmail(true);
-      setTimeout(() => setCopiedEmail(false), 2000);
-    } catch (err) {
-      console.error('Failed to copy email:', err);
-    }
-  };
 
   const socialLinks = [
     {
