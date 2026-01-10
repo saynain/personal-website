@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useEffect, KeyboardEvent } from 'react'
+import { useState, useRef, useEffect, KeyboardEvent, ReactNode } from 'react'
 
 // Ghostty-inspired Tokyo Night color scheme
 const colors = {
@@ -52,11 +52,11 @@ const ghostAscii = `
 
 interface HistoryItem {
   type: 'input' | 'output'
-  content: string | JSX.Element
+  content: string | ReactNode
 }
 
 // Command definitions
-const commands: Record<string, () => string | JSX.Element> = {
+const commands: Record<string, () => string | ReactNode> = {
   help: () => `
 Available commands:
   help        Show this help message
@@ -146,7 +146,7 @@ Learn more: https://ghostty.org
 }
 
 // Neofetch command with special rendering
-const neofetchOutput = (): JSX.Element => (
+const neofetchOutput = (): ReactNode => (
   <div className="flex gap-6 sm:gap-8">
     <pre className="text-xs leading-tight hidden sm:block" style={{ color: colors.green }}>
       {appleAscii}
