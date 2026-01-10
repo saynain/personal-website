@@ -2,20 +2,31 @@
 
 import { useState, useRef, useEffect, KeyboardEvent, ReactNode } from 'react'
 
-// Ghostty-inspired Tokyo Night color scheme
+// Catppuccin Mocha color scheme
 const colors = {
-  bg: '#1a1b26',
-  bgDark: '#16161e',
-  bgHighlight: '#292e42',
-  fg: '#c0caf5',
-  fgDark: '#565f89',
-  blue: '#7aa2f7',
-  cyan: '#7dcfff',
-  green: '#9ece6a',
-  magenta: '#bb9af7',
-  red: '#f7768e',
-  yellow: '#e0af68',
-  orange: '#ff9e64',
+  base: '#1e1e2e',
+  mantle: '#181825',
+  crust: '#11111b',
+  surface0: '#313244',
+  surface1: '#45475a',
+  surface2: '#585b70',
+  text: '#cdd6f4',
+  subtext0: '#a6adc8',
+  subtext1: '#bac2de',
+  blue: '#89b4fa',
+  lavender: '#b4befe',
+  sapphire: '#74c7ec',
+  sky: '#89dceb',
+  teal: '#94e2d5',
+  green: '#a6e3a1',
+  yellow: '#f9e2af',
+  peach: '#fab387',
+  maroon: '#eba0ac',
+  red: '#f38ba8',
+  mauve: '#cba6f7',
+  pink: '#f5c2e7',
+  flamingo: '#f2cdcd',
+  rosewater: '#f5e0dc',
 }
 
 // ASCII Art for neofetch
@@ -132,16 +143,18 @@ drwxr-xr-x  skills/
 -rw-r--r--  projects.md
 `,
   theme: () => `
-Terminal Theme: Ghostty + Tokyo Night Storm
-============================================
+Terminal Theme: Ghostty + Catppuccin Mocha
+==========================================
 
 Ghostty is a fast, feature-rich terminal emulator that
 uses platform-native UI and GPU acceleration.
 
-This terminal is inspired by Ghostty's aesthetic and
-implements the Tokyo Night Storm color scheme.
+Catppuccin is a soothing pastel theme for the high-spirited!
+This terminal uses the Mocha flavor - the darkest variant.
 
-Learn more: https://ghostty.org
+Learn more:
+  Ghostty:    https://ghostty.org
+  Catppuccin: https://catppuccin.com
 `,
 }
 
@@ -151,36 +164,36 @@ const neofetchOutput = (): ReactNode => (
     <pre className="text-xs leading-tight hidden sm:block" style={{ color: colors.green }}>
       {appleAscii}
     </pre>
-    <pre className="text-xs leading-tight sm:hidden" style={{ color: colors.magenta }}>
+    <pre className="text-xs leading-tight sm:hidden" style={{ color: colors.mauve }}>
       {ghostAscii}
     </pre>
     <div className="text-xs space-y-0.5">
-      <div><span style={{ color: colors.green }}>saynain</span>@<span style={{ color: colors.green }}>portfolio</span></div>
-      <div style={{ color: colors.fgDark }}>-----------------</div>
-      <div><span style={{ color: colors.blue }}>OS:</span> Portfolio 2.0.0 (Next.js 15)</div>
-      <div><span style={{ color: colors.blue }}>Host:</span> MacBook Pro M4 (2024)</div>
-      <div><span style={{ color: colors.blue }}>Kernel:</span> TypeScript 5.0</div>
-      <div><span style={{ color: colors.blue }}>Uptime:</span> Always online</div>
-      <div><span style={{ color: colors.blue }}>Packages:</span> 49 (brew), 200+ (npm)</div>
-      <div><span style={{ color: colors.blue }}>Shell:</span> zsh 5.9 (oh-my-zsh)</div>
-      <div><span style={{ color: colors.blue }}>Resolution:</span> 3440x1440, 1512x982</div>
-      <div><span style={{ color: colors.blue }}>DE:</span> VS Code + Cursor</div>
-      <div><span style={{ color: colors.blue }}>WM:</span> Arc Browser</div>
-      <div><span style={{ color: colors.blue }}>WM Theme:</span> Tokyo Night Storm</div>
-      <div><span style={{ color: colors.blue }}>Terminal:</span> ghostty</div>
-      <div><span style={{ color: colors.blue }}>CPU:</span> Apple M4 Pro</div>
-      <div><span style={{ color: colors.blue }}>GPU:</span> Apple M4 Pro</div>
-      <div><span style={{ color: colors.blue }}>Memory:</span> 48GB / 48GB (Unified)</div>
-      <div className="mt-1"><span style={{ color: colors.blue }}>Location:</span> Norway</div>
-      <div><span style={{ color: colors.blue }}>Fuel:</span> Coffee + Dark Chocolate</div>
+      <div><span style={{ color: colors.teal }}>saynain</span>@<span style={{ color: colors.teal }}>portfolio</span></div>
+      <div style={{ color: colors.surface2 }}>-----------------</div>
+      <div><span style={{ color: colors.mauve }}>OS:</span> Portfolio 2.0.0 (Next.js 15)</div>
+      <div><span style={{ color: colors.mauve }}>Host:</span> MacBook Pro M4 (2024)</div>
+      <div><span style={{ color: colors.mauve }}>Kernel:</span> TypeScript 5.0</div>
+      <div><span style={{ color: colors.mauve }}>Uptime:</span> Always online</div>
+      <div><span style={{ color: colors.mauve }}>Packages:</span> 49 (brew), 200+ (npm)</div>
+      <div><span style={{ color: colors.mauve }}>Shell:</span> zsh 5.9 (oh-my-zsh)</div>
+      <div><span style={{ color: colors.mauve }}>Resolution:</span> 3440x1440, 1512x982</div>
+      <div><span style={{ color: colors.mauve }}>DE:</span> VS Code + Cursor</div>
+      <div><span style={{ color: colors.mauve }}>WM:</span> Arc Browser</div>
+      <div><span style={{ color: colors.mauve }}>WM Theme:</span> Catppuccin Mocha</div>
+      <div><span style={{ color: colors.mauve }}>Terminal:</span> ghostty</div>
+      <div><span style={{ color: colors.mauve }}>CPU:</span> Apple M4 Pro</div>
+      <div><span style={{ color: colors.mauve }}>GPU:</span> Apple M4 Pro</div>
+      <div><span style={{ color: colors.mauve }}>Memory:</span> 48GB / 48GB (Unified)</div>
+      <div className="mt-1"><span style={{ color: colors.mauve }}>Location:</span> Norway</div>
+      <div><span style={{ color: colors.mauve }}>Fuel:</span> Coffee + Dark Chocolate</div>
       <div className="flex gap-1 mt-2">
-        {['#1a1b26', '#f7768e', '#9ece6a', '#e0af68', '#7aa2f7', '#bb9af7', '#7dcfff', '#c0caf5'].map((c, i) => (
-          <div key={i} className="w-3 h-3 sm:w-4 sm:h-4" style={{ backgroundColor: c }} />
+        {[colors.rosewater, colors.flamingo, colors.pink, colors.mauve, colors.red, colors.maroon, colors.peach, colors.yellow].map((c, i) => (
+          <div key={i} className="w-3 h-3 sm:w-4 sm:h-4 rounded-sm" style={{ backgroundColor: c }} />
         ))}
       </div>
       <div className="flex gap-1">
-        {['#414868', '#ff9e64', '#73daca', '#ff9e64', '#2ac3de', '#c0caf5', '#89ddff', '#565f89'].map((c, i) => (
-          <div key={i} className="w-3 h-3 sm:w-4 sm:h-4" style={{ backgroundColor: c }} />
+        {[colors.green, colors.teal, colors.sky, colors.sapphire, colors.blue, colors.lavender, colors.text, colors.surface2].map((c, i) => (
+          <div key={i} className="w-3 h-3 sm:w-4 sm:h-4 rounded-sm" style={{ backgroundColor: c }} />
         ))}
       </div>
     </div>
@@ -193,7 +206,7 @@ const catFiles: Record<string, string> = {
 # Welcome to my Portfolio
 
 This is an interactive terminal built with React and
-styled after Ghostty - my favorite terminal emulator.
+styled after Ghostty with Catppuccin Mocha theme.
 
 ## Quick Start
 
@@ -203,7 +216,7 @@ Type 'help' to see available commands.
 
 - Interactive command input
 - Command history (use arrow keys)
-- Ghostty-inspired Tokyo Night theme
+- Catppuccin Mocha color scheme
 - Custom portfolio commands
 
 Enjoy exploring!
@@ -222,6 +235,28 @@ Tech: TypeScript, React, Next.js, Tailwind CSS
 More projects in the works...
 `,
 }
+
+// Custom scrollbar styles
+const scrollbarStyles = `
+  .terminal-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+  .terminal-scrollbar::-webkit-scrollbar-track {
+    background: ${colors.mantle};
+    border-radius: 4px;
+  }
+  .terminal-scrollbar::-webkit-scrollbar-thumb {
+    background: ${colors.surface1};
+    border-radius: 4px;
+  }
+  .terminal-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: ${colors.surface2};
+  }
+  .terminal-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: ${colors.surface1} ${colors.mantle};
+  }
+`
 
 export default function Terminal() {
   const [history, setHistory] = useState<HistoryItem[]>([
@@ -317,8 +352,9 @@ export default function Terminal() {
 
   return (
     <section id="terminal" className="py-20 bg-gradient-to-b from-gray-50 to-white dark:from-slate-900 dark:to-slate-800">
+      <style dangerouslySetInnerHTML={{ __html: scrollbarStyles }} />
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
-        <h2 className="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-16" style={{ color: colors.magenta }}>
+        <h2 className="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-16" style={{ color: colors.mauve }}>
           Interactive Terminal
         </h2>
 
@@ -326,22 +362,22 @@ export default function Terminal() {
         <div
           className="rounded-xl shadow-2xl overflow-hidden border cursor-text"
           style={{
-            backgroundColor: colors.bg,
-            borderColor: colors.bgHighlight
+            backgroundColor: colors.base,
+            borderColor: colors.surface0
           }}
           onClick={handleTerminalClick}
         >
           {/* Terminal Header - Ghostty style */}
           <div
             className="px-4 py-2.5 flex items-center"
-            style={{ backgroundColor: colors.bgDark }}
+            style={{ backgroundColor: colors.mantle }}
           >
             <div className="flex gap-2">
-              <div className="w-3 h-3 rounded-full bg-[#ff5f56] hover:bg-[#ff5f56]/80 transition-colors" />
-              <div className="w-3 h-3 rounded-full bg-[#ffbd2e] hover:bg-[#ffbd2e]/80 transition-colors" />
-              <div className="w-3 h-3 rounded-full bg-[#27c93f] hover:bg-[#27c93f]/80 transition-colors" />
+              <div className="w-3 h-3 rounded-full transition-colors" style={{ backgroundColor: colors.red }} />
+              <div className="w-3 h-3 rounded-full transition-colors" style={{ backgroundColor: colors.yellow }} />
+              <div className="w-3 h-3 rounded-full transition-colors" style={{ backgroundColor: colors.green }} />
             </div>
-            <div className="flex-1 text-center text-xs sm:text-sm font-medium" style={{ color: colors.fgDark }}>
+            <div className="flex-1 text-center text-xs sm:text-sm font-medium" style={{ color: colors.subtext0 }}>
               saynain@portfolio ~ ghostty
             </div>
             <div className="w-16" /> {/* Spacer for centering */}
@@ -350,20 +386,20 @@ export default function Terminal() {
           {/* Terminal Content */}
           <div
             ref={terminalRef}
-            className="p-4 sm:p-6 font-mono text-xs sm:text-sm h-[400px] sm:h-[500px] overflow-y-auto"
-            style={{ backgroundColor: colors.bg }}
+            className="p-4 sm:p-6 font-mono text-xs sm:text-sm h-[400px] sm:h-[500px] overflow-y-auto terminal-scrollbar"
+            style={{ backgroundColor: colors.base }}
           >
             {/* History */}
             {history.map((item, index) => (
               <div key={index} className="mb-2">
                 {item.type === 'input' ? (
                   <div className="flex items-center gap-2">
-                    <span style={{ color: colors.green }}>~</span>
+                    <span style={{ color: colors.teal }}>~</span>
                     <span style={{ color: colors.blue }}>$</span>
-                    <span style={{ color: colors.fg }}>{item.content}</span>
+                    <span style={{ color: colors.text }}>{item.content}</span>
                   </div>
                 ) : (
-                  <div className="whitespace-pre-wrap" style={{ color: colors.fg }}>
+                  <div className="whitespace-pre-wrap" style={{ color: colors.text }}>
                     {item.content}
                   </div>
                 )}
@@ -372,7 +408,7 @@ export default function Terminal() {
 
             {/* Current Input Line */}
             <div className="flex items-center gap-2">
-              <span style={{ color: colors.green }}>~</span>
+              <span style={{ color: colors.teal }}>~</span>
               <span style={{ color: colors.blue }}>$</span>
               <div className="flex-1 relative">
                 <input
@@ -382,7 +418,7 @@ export default function Terminal() {
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={handleKeyDown}
                   className="w-full bg-transparent outline-none caret-transparent"
-                  style={{ color: colors.fg }}
+                  style={{ color: colors.text }}
                   spellCheck={false}
                   autoComplete="off"
                   autoFocus
@@ -392,7 +428,7 @@ export default function Terminal() {
                   className="absolute top-0 h-full w-2 animate-pulse"
                   style={{
                     left: `${input.length * 0.6}em`,
-                    backgroundColor: colors.green
+                    backgroundColor: colors.rosewater
                   }}
                 />
               </div>
@@ -403,19 +439,19 @@ export default function Terminal() {
           <div
             className="px-4 py-2 flex items-center justify-between text-xs border-t"
             style={{
-              backgroundColor: colors.bgDark,
-              borderColor: colors.bgHighlight,
-              color: colors.fgDark
+              backgroundColor: colors.mantle,
+              borderColor: colors.surface0,
+              color: colors.subtext0
             }}
           >
             <span>Type &apos;help&apos; for commands</span>
-            <span className="hidden sm:inline">Ghostty + Tokyo Night</span>
+            <span className="hidden sm:inline">Ghostty + Catppuccin Mocha</span>
           </div>
         </div>
 
         {/* Terminal info */}
         <div className="flex justify-center mt-6">
-          <div className="flex items-center gap-2 text-sm" style={{ color: colors.fgDark }}>
+          <div className="flex items-center gap-2 text-sm" style={{ color: colors.subtext0 }}>
             <div className="w-2 h-2 rounded-full" style={{ backgroundColor: colors.green }} />
             <span>Interactive terminal</span>
             <span>•</span>
