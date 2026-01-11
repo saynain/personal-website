@@ -61,21 +61,60 @@ html {
   opacity: 0;
 }
 
-/* Custom scrollbar for webkit browsers */
+/* Custom scrollbar - Catppuccin themed */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #cba6f7 #1e1e2e; /* Mocha mauve on base */
+}
+
+.dark * {
+  scrollbar-color: #cba6f7 #1e1e2e; /* Mocha mauve on base */
+}
+
+:root * {
+  scrollbar-color: #8839ef #eff1f5; /* Latte mauve on base */
+}
+
+.dark ::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-gray-200 dark:bg-slate-800;
+  background: #eff1f5; /* Latte base */
+  border-radius: 5px;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #1e1e2e; /* Mocha base */
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-pink-500 rounded;
+  background: #8839ef; /* Latte mauve */
+  border-radius: 5px;
+  border: 2px solid #eff1f5; /* Latte base */
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #cba6f7; /* Mocha mauve */
+  border: 2px solid #1e1e2e; /* Mocha base */
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-pink-600;
+  background: #7287fd; /* Latte lavender */
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #b4befe; /* Mocha lavender */
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
 }
 
 /* Selection styling */
