@@ -6,7 +6,7 @@ import { SunIcon, MoonIcon } from '@heroicons/react/24/outline'
 
 export default function ThemeToggle() {
   const [mounted, setMounted] = useState(false)
-  const { theme, setTheme } = useTheme()
+  const { resolvedTheme, setTheme } = useTheme()
 
   useEffect(() => {
     setMounted(true)
@@ -14,13 +14,13 @@ export default function ThemeToggle() {
 
   if (!mounted) return null
 
-  const isDark = theme === 'dark'
+  // Use resolvedTheme to handle "system" preference correctly
+  const isDark = resolvedTheme === 'dark'
 
   return (
     <button
       onClick={() => {
-        const newTheme = theme === 'dark' ? 'light' : 'dark'
-        setTheme(newTheme)
+        setTheme(isDark ? 'light' : 'dark')
       }}
       className="relative group p-2 rounded-full bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-400/20 hover:border-purple-400/40 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25"
       aria-label="Toggle theme"
