@@ -26,14 +26,14 @@ export default function ThemeToggle() {
       aria-label="Toggle theme"
     >
       <div className="relative w-6 h-6 flex items-center justify-center">
-        {/* Sun Icon */}
+        {/* Sun Icon - shows in dark mode (click to switch to light) */}
         <SunIcon className={`absolute w-5 h-5 text-yellow-500 transition-all duration-500 ${
-          isDark ? 'opacity-0 rotate-180 scale-0' : 'opacity-100 rotate-0 scale-100'
+          isDark ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 rotate-180 scale-0'
         }`} />
-        
-        {/* Moon Icon */}
+
+        {/* Moon Icon - shows in light mode (click to switch to dark) */}
         <MoonIcon className={`absolute w-5 h-5 text-purple-400 transition-all duration-500 ${
-          isDark ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 -rotate-180 scale-0'
+          isDark ? 'opacity-0 -rotate-180 scale-0' : 'opacity-100 rotate-0 scale-100'
         }`} />
       </div>
 

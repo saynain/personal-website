@@ -312,14 +312,18 @@ export default function Terminal() {
   const colors = isLight ? catppuccinLatte : catppuccinMocha
   const commands = createCommands(colors, isLight)
 
+  // Track if initial neofetch has been shown
+  const initializedRef = useRef(false)
+
   // Handle hydration
   useEffect(() => {
     setMounted(true)
   }, [])
 
-  // Initialize with neofetch after mount and update when theme changes
+  // Initialize with neofetch only once after mount
   useEffect(() => {
-    if (mounted) {
+    if (mounted && !initializedRef.current) {
+      initializedRef.current = true
       const currentColors = resolvedTheme === 'light' ? catppuccinLatte : catppuccinMocha
       setHistory([{ type: 'output', content: createNeofetchOutput(currentColors) }])
     }
