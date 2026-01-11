@@ -1,9 +1,10 @@
 'use client'
 
 import { useState, useRef, useEffect, KeyboardEvent, ReactNode } from 'react'
+import { useTheme } from 'next-themes'
 
-// Catppuccin Mocha color scheme
-const colors = {
+// Catppuccin Mocha (dark) color scheme
+const catppuccinMocha = {
   base: '#1e1e2e',
   mantle: '#181825',
   crust: '#11111b',
@@ -27,6 +28,33 @@ const colors = {
   pink: '#f5c2e7',
   flamingo: '#f2cdcd',
   rosewater: '#f5e0dc',
+}
+
+// Catppuccin Latte (light) color scheme
+const catppuccinLatte = {
+  base: '#eff1f5',
+  mantle: '#e6e9ef',
+  crust: '#dce0e8',
+  surface0: '#ccd0da',
+  surface1: '#bcc0cc',
+  surface2: '#acb0be',
+  text: '#4c4f69',
+  subtext0: '#6c6f85',
+  subtext1: '#5c5f77',
+  blue: '#1e66f5',
+  lavender: '#7287fd',
+  sapphire: '#209fb5',
+  sky: '#04a5e5',
+  teal: '#179299',
+  green: '#40a02b',
+  yellow: '#df8e1d',
+  peach: '#fe640b',
+  maroon: '#e64553',
+  red: '#d20f39',
+  mauve: '#8839ef',
+  pink: '#ea76cb',
+  flamingo: '#dd7878',
+  rosewater: '#dc8a78',
 }
 
 // ASCII Art for neofetch
@@ -66,8 +94,8 @@ interface HistoryItem {
   content: string | ReactNode
 }
 
-// Command definitions
-const commands: Record<string, () => string | ReactNode> = {
+// Command definitions factory that takes colors
+const createCommands = (colors: typeof catppuccinMocha, isLight: boolean): Record<string, () => string | ReactNode> => ({
   help: () => `
 Available commands:
   help        Show this help message
@@ -143,23 +171,23 @@ drwxr-xr-x  skills/
 -rw-r--r--  projects.md
 `,
   theme: () => `
-Terminal Theme: Ghostty + Catppuccin Mocha
+Terminal Theme: Ghostty + Catppuccin ${isLight ? 'Latte' : 'Mocha'}
 ==========================================
 
 Ghostty is a fast, feature-rich terminal emulator that
 uses platform-native UI and GPU acceleration.
 
 Catppuccin is a soothing pastel theme for the high-spirited!
-This terminal uses the Mocha flavor - the darkest variant.
+This terminal uses the ${isLight ? 'Latte' : 'Mocha'} flavor - the ${isLight ? 'lightest' : 'darkest'} variant.
 
 Learn more:
   Ghostty:    https://ghostty.org
   Catppuccin: https://catppuccin.com
 `,
-}
+})
 
 // Neofetch command with special rendering
-const neofetchOutput = (): ReactNode => (
+const createNeofetchOutput = (colors: typeof catppuccinMocha): ReactNode => (
   <div className="flex gap-6 sm:gap-8">
     <pre className="text-xs leading-tight hidden sm:block" style={{ color: colors.green }}>
       {appleAscii}
@@ -179,7 +207,7 @@ const neofetchOutput = (): ReactNode => (
       <div><span style={{ color: colors.mauve }}>Resolution:</span> 3440x1440, 1512x982</div>
       <div><span style={{ color: colors.mauve }}>DE:</span> VS Code + Cursor</div>
       <div><span style={{ color: colors.mauve }}>WM:</span> Arc Browser</div>
-      <div><span style={{ color: colors.mauve }}>WM Theme:</span> Catppuccin Mocha</div>
+      <div><span style={{ color: colors.mauve }}>WM Theme:</span> Catppuccin</div>
       <div><span style={{ color: colors.mauve }}>Terminal:</span> ghostty</div>
       <div><span style={{ color: colors.mauve }}>CPU:</span> Apple M4 Pro</div>
       <div><span style={{ color: colors.mauve }}>GPU:</span> Apple M4 Pro</div>
@@ -206,7 +234,7 @@ const catFiles: Record<string, string> = {
 # Welcome to my Portfolio
 
 This is an interactive terminal built with React and
-styled after Ghostty with Catppuccin Mocha theme.
+styled after Ghostty with Catppuccin theme.
 
 ## Quick Start
 
@@ -216,12 +244,23 @@ Type 'help' to see available commands.
 
 - Interactive command input
 - Command history (use arrow keys)
-- Catppuccin Mocha color scheme
+- Catppuccin color scheme (Latte/Mocha)
+- Automatic light/dark mode support
 - Custom portfolio commands
 
 Enjoy exploring!
 `,
-  'contact.md': commands.contact() as string,
+  'contact.md': `
+Contact Information
+===================
+
+GitHub:    github.com/saynain
+Email:     hello@saynain.dev
+Location:  Norway
+
+Feel free to reach out for collaborations,
+opportunities, or just to say hi!
+`,
   'projects.md': `
 # Projects
 
@@ -236,8 +275,8 @@ More projects in the works...
 `,
 }
 
-// Custom scrollbar styles
-const scrollbarStyles = `
+// Custom scrollbar styles generator
+const createScrollbarStyles = (colors: typeof catppuccinMocha) => `
   .terminal-scrollbar::-webkit-scrollbar {
     width: 8px;
   }
@@ -259,14 +298,32 @@ const scrollbarStyles = `
 `
 
 export default function Terminal() {
-  const [history, setHistory] = useState<HistoryItem[]>([
-    { type: 'output', content: neofetchOutput() }
-  ])
+  const [mounted, setMounted] = useState(false)
+  const { resolvedTheme } = useTheme()
+  const [history, setHistory] = useState<HistoryItem[]>([])
   const [input, setInput] = useState('')
   const [commandHistory, setCommandHistory] = useState<string[]>([])
   const [historyIndex, setHistoryIndex] = useState(-1)
   const inputRef = useRef<HTMLInputElement>(null)
   const terminalRef = useRef<HTMLDivElement>(null)
+
+  // Determine colors based on theme
+  const isLight = mounted && resolvedTheme === 'light'
+  const colors = isLight ? catppuccinLatte : catppuccinMocha
+  const commands = createCommands(colors, isLight)
+
+  // Handle hydration
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  // Initialize with neofetch after mount and update when theme changes
+  useEffect(() => {
+    if (mounted) {
+      const currentColors = resolvedTheme === 'light' ? catppuccinLatte : catppuccinMocha
+      setHistory([{ type: 'output', content: createNeofetchOutput(currentColors) }])
+    }
+  }, [mounted, resolvedTheme])
 
   // Auto-scroll to bottom when history changes
   useEffect(() => {
@@ -297,7 +354,7 @@ export default function Terminal() {
     } else if (command === 'clear') {
       setHistory([])
     } else if (command === 'neofetch') {
-      setHistory([...newHistory, { type: 'output', content: neofetchOutput() }])
+      setHistory([...newHistory, { type: 'output', content: createNeofetchOutput(colors) }])
     } else if (command === 'cat') {
       const filename = args[1]
       if (!filename) {
@@ -350,9 +407,23 @@ export default function Terminal() {
     }
   }
 
+  // Prevent hydration mismatch by showing a placeholder until mounted
+  if (!mounted) {
+    return (
+      <section id="terminal" className="py-20 bg-gradient-to-b from-gray-50 to-white dark:from-slate-900 dark:to-slate-800">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-16 text-purple-500">
+            Interactive Terminal
+          </h2>
+          <div className="rounded-xl shadow-2xl overflow-hidden border h-[456px] sm:h-[556px] bg-gray-900 dark:bg-gray-900 border-gray-700 animate-pulse" />
+        </div>
+      </section>
+    )
+  }
+
   return (
     <section id="terminal" className="py-20 bg-gradient-to-b from-gray-50 to-white dark:from-slate-900 dark:to-slate-800">
-      <style dangerouslySetInnerHTML={{ __html: scrollbarStyles }} />
+      <style dangerouslySetInnerHTML={{ __html: createScrollbarStyles(colors) }} />
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
         <h2 className="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-16" style={{ color: colors.mauve }}>
           Interactive Terminal
@@ -360,7 +431,7 @@ export default function Terminal() {
 
         {/* Terminal Window */}
         <div
-          className="rounded-xl shadow-2xl overflow-hidden border cursor-text"
+          className="rounded-xl shadow-2xl overflow-hidden border cursor-text transition-colors duration-300"
           style={{
             backgroundColor: colors.base,
             borderColor: colors.surface0
@@ -369,7 +440,7 @@ export default function Terminal() {
         >
           {/* Terminal Header - Ghostty style */}
           <div
-            className="px-4 py-2.5 flex items-center"
+            className="px-4 py-2.5 flex items-center transition-colors duration-300"
             style={{ backgroundColor: colors.mantle }}
           >
             <div className="flex gap-2">
@@ -377,7 +448,7 @@ export default function Terminal() {
               <div className="w-3 h-3 rounded-full transition-colors" style={{ backgroundColor: colors.yellow }} />
               <div className="w-3 h-3 rounded-full transition-colors" style={{ backgroundColor: colors.green }} />
             </div>
-            <div className="flex-1 text-center text-xs sm:text-sm font-medium" style={{ color: colors.subtext0 }}>
+            <div className="flex-1 text-center text-xs sm:text-sm font-medium transition-colors duration-300" style={{ color: colors.subtext0 }}>
               saynain@portfolio ~ ghostty
             </div>
             <div className="w-16" /> {/* Spacer for centering */}
@@ -386,7 +457,7 @@ export default function Terminal() {
           {/* Terminal Content */}
           <div
             ref={terminalRef}
-            className="p-4 sm:p-6 font-mono text-xs sm:text-sm h-[400px] sm:h-[500px] overflow-y-auto terminal-scrollbar"
+            className="p-4 sm:p-6 font-mono text-xs sm:text-sm h-[400px] sm:h-[500px] overflow-y-auto terminal-scrollbar transition-colors duration-300"
             style={{ backgroundColor: colors.base }}
           >
             {/* History */}
@@ -437,7 +508,7 @@ export default function Terminal() {
 
           {/* Terminal Footer */}
           <div
-            className="px-4 py-2 flex items-center justify-between text-xs border-t"
+            className="px-4 py-2 flex items-center justify-between text-xs border-t transition-colors duration-300"
             style={{
               backgroundColor: colors.mantle,
               borderColor: colors.surface0,
@@ -445,14 +516,14 @@ export default function Terminal() {
             }}
           >
             <span>Type &apos;help&apos; for commands</span>
-            <span className="hidden sm:inline">Ghostty + Catppuccin Mocha</span>
+            <span className="hidden sm:inline">Ghostty + Catppuccin {isLight ? 'Latte' : 'Mocha'}</span>
           </div>
         </div>
 
         {/* Terminal info */}
         <div className="flex justify-center mt-6">
-          <div className="flex items-center gap-2 text-sm" style={{ color: colors.subtext0 }}>
-            <div className="w-2 h-2 rounded-full" style={{ backgroundColor: colors.green }} />
+          <div className="flex items-center gap-2 text-sm transition-colors duration-300" style={{ color: colors.subtext0 }}>
+            <div className="w-2 h-2 rounded-full transition-colors duration-300" style={{ backgroundColor: colors.green }} />
             <span>Interactive terminal</span>
             <span>•</span>
             <span>Powered by React</span>
